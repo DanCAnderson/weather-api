@@ -23,9 +23,9 @@ City:
 ```
 City can be used alone, or with country, or with state and country, but not city and state alone.
 
-Zipcode:
+Zipcode (non-US zipcodes require country code):
 ```
-&zip={zipcode}
+&zip={zipcode},{country}
 ```
 
 Lattitude and Longitude:
