@@ -1,12 +1,13 @@
 const app = require('../app');
 const request = require('supertest');
-const assert = require('assert');
-const { WEATHER_KEY } = require('../key');
+//const assert = require('assert');
+//require('dotenv').config();
+
 
 describe('Location queries', () => {
     it('By city', (done) => {
         return request(app)
-        .get('/api?q=current&city=minneapolis&appid=' + WEATHER_KEY)
+        .get('/api?q=current&city=minneapolis')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {
@@ -17,7 +18,7 @@ describe('Location queries', () => {
     });
     it('By Zipcode', (done) => {
         return request(app)
-        .get('/api?q=current&zip=55401&appid=' + WEATHER_KEY)
+        .get('/api?q=current&zip=55401')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {
@@ -28,7 +29,7 @@ describe('Location queries', () => {
     });
     it('By Int\'l Zipcode', (done) => {
         return request(app)
-        .get('/api?q=current&zip=e14,GB&appid=' + WEATHER_KEY)
+        .get('/api?q=current&zip=e14,GB')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {
@@ -39,7 +40,7 @@ describe('Location queries', () => {
     });
     it('By Lat and Lon', (done) => {
         return request(app)
-        .get('/api?q=current&lat=44.97&lon=-93.26&appid=' + WEATHER_KEY)
+        .get('/api?q=current&lat=44.97&lon=-93.26')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {
@@ -53,7 +54,7 @@ describe('Location queries', () => {
 describe('Time queries', () => {
     it('Current weather', (done) => {
         return request(app)
-        .get('/api?q=current&zip=55401&appid=' + WEATHER_KEY)
+        .get('/api?q=current&zip=55401')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {
@@ -64,7 +65,7 @@ describe('Time queries', () => {
     })
     it('Hourly weather', (done) => {
         return request(app)
-        .get('/api?q=hourly&zip=55401&appid=' + WEATHER_KEY)
+        .get('/api?q=hourly&zip=55401')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {
@@ -75,7 +76,7 @@ describe('Time queries', () => {
     });
     it('Daily weather', (done) => {
         return request(app)
-        .get('/api?q=daily&zip=55401&appid=' + WEATHER_KEY)
+        .get('/api?q=daily&zip=55401')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect((res) => {

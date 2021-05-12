@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 
-var { WEATHER_KEY } = require('../key');
+require('dotenv').config();
 
 /* GET  */
 router.get('/', [
@@ -22,7 +22,8 @@ router.get('/', [
     else if (req.query.zip) geoQuery = 'zip?zip=' + req.query.zip;
     else return res.status(400).send({cod: 400, message: 'No location provided'});
 
-    let url = `http://api.openweathermap.org/geo/1.0/${geoQuery}&appid=${WEATHER_KEY}`;
+    let url = `http://api.openweathermap.org/geo/1.0/${geoQuery}&appid=${process.env.WEATHER_KEY}`;
+    console.log(url);
     axios.get(url)
     .then(function (response){
 
@@ -58,7 +59,7 @@ router.get('/', [
     else if (req.query.q === 'daily') exclude = 'minutely,current,hourly';
     else if (req.query.q === 'current') exclude = 'minutely,hourly,daily';
 
-    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${req.lat}&lon=${req.lon}&units=${units}&exclude=${exclude}${lang}&appid=${WEATHER_KEY}`;
+    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${req.lat}&lon=${req.lon}&units=${units}&exclude=${exclude}${lang}&appid=${process.env.WEATHER_KEY}`;
     axios.get(url)
     .then(function (response) {
       res.send(response.data);
